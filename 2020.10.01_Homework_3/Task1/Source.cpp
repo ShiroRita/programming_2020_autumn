@@ -297,10 +297,9 @@ int deleteGroup(int*& a_)
 	}
 	else
 	{
-		int i = startIndex;
-		for (i; i < startIndex + n; ++i)
+		for (int i = startIndex; i < startIndex + n; ++i)
 		{
-			*(a_ + i) = *(a_ + i + 1);
+			*(a_ + i) = *(a_ + i + n);
 		}
 		*(a_ - 2) = *(a_ - 2) - n;
 		return 0;
