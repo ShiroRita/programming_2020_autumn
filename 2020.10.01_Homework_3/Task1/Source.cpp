@@ -298,11 +298,11 @@ int deleteGroup(int*& a_)
 	else
 	{
 		int i = startIndex;
-		for (i; i < startIndex + n; ++i);
+		for (i; i < startIndex + n; ++i)
 		{
 			*(a_ + i) = *(a_ + i + 1);
 		}
-		*(a_ - 2) = *(a_ - 2 - n);
+		*(a_ - 2) = *(a_ - 2) - n;
 		return 0;
 	}
 }
@@ -315,20 +315,10 @@ void choice8(int*& arr1, int*& arr2)//удаление последовательности
 	if (choiceArr == 1)
 	{
 		deleteGroup(arr1);
-		while (deleteGroup(arr1) == 1)
-		{
-			cout << "Данные некорректны";
-			deleteGroup(arr1);
-		}
 	}
 	else
 	{
 		deleteGroup(arr2);
-		while (deleteGroup(arr2) == 1)
-		{
-			cout << "Данные некорректны";
-			deleteGroup(arr2);
-		}
 	}
 }
 
@@ -397,22 +387,31 @@ void processChoice(int*& arr1, int*& arr2, int choice)
 	{
 	case 1:
 		choice1(arr1, arr2);
+		break;
 	case 2:
 		choice2(arr1, arr2);
+		break;
 	case 3:
 		choice3(arr1, arr2);
+		break;
 	case 4:
 		choice4(arr1, arr2);
+		break;
 	case 5:
 		choice5(arr1, arr2);
+		break;
 	case 6:
 		choice6(arr1, arr2);
+		break;
 	case 7:
 		choice7(arr1, arr2);
+		break;
 	case 8:
 		choice8(arr1, arr2);
+		break;
 	case 9:
 		choice9(arr1, arr2);
+		break;
 	}
 }
 
