@@ -217,10 +217,12 @@ void choice6(int*& arr1, int*& arr2)
 	cin >> choiceArr;
 	if (choiceArr == 1)
 	{
+		deleteArray(arr1);
 		arr1 = unify(arr1, arr2);
 	}
 	else
 	{
+		deleteArray(arr2);
 		arr2 = unify(arr2, arr1);
 	}
 }
