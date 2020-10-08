@@ -51,35 +51,55 @@ void addElement(int*& a_, int x)
 	++(*(a_ - 2));
 }
 
+int input(int& i)
+{
+	cin >> i;
+	return i;
+}
+
 void addSomeElements(int*& a_)
 {
-	cout << "Введите несколько элементов. Введение 0 остановит ввод" << endl;
-	int x = -1;
-	do
+	cout << "Сколько элементов вы хотите ввести? n = ";
+	int n = input(n);
+	
+	cout << "Вводимые элементы: ";
+	for (int i = 0; i < n; ++i)
 	{
-		cin >> x;
+		int x = input(x);
 		addElement(a_, x);
+	}
+}
 
-	} while (x != 0);
+int chooseArray(int& a)
+{
+	cout << "Выберите массив. 1 или 2" << endl;
+	return input(a);
 }
 
 void choice1(int*& arr1, int*& arr2)
 {
-	cout << "Выберите массив. 1 или 2" << endl;
-	int choiceArr;
-	cin >> choiceArr;
-	if (choiceArr == 1)
+	switch (int choiceArr = chooseArray(choiceArr))
 	{
+	case 1:
 		addSomeElements(arr1);
-	}
-	else
-	{
+		break;
+	case 2:
 		addSomeElements(arr2);
+		break;
 	}
 }
 
-void addRandomElements(int*& a_, int n, int min, int max)
+void addRandomElements(int*& a_)
 {
+	cout << "n = " << endl;
+	int n = input(n);
+
+	cout << "a = " << endl;
+	int max = input(max);
+
+	cout << "b = " << endl;
+	int min = input(min);
+
 	for (int i = 0; i < n; ++i)
 	{
 		addElement(a_, rand() % (max - min + 1) + min);
@@ -88,30 +108,14 @@ void addRandomElements(int*& a_, int n, int min, int max)
 
 void choice2(int*& arr1, int*& arr2)
 {
-	cout << "Выберите массив. 1 или 2" << endl;
-	int choiceArr;
-	cin >> choiceArr;
-
-	cout << "n = " << endl;
-	int n;
-	cin >> n;
-
-	cout << "a = " << endl;
-	int a;
-	cin >> a;
-
-	cout << "b = " << endl;
-	int b;
-	cin >> b;
-
-
-	if (choiceArr == 1)
+	switch(int choiceArr = chooseArray(choiceArr))
 	{
-		addRandomElements(arr1, n, a, b);
-	}
-	else
-	{
-		addRandomElements(arr2, n, a, b);
+	case 1:
+		addRandomElements(arr1);
+		break;
+	case 2:
+		addRandomElements(arr2);
+		break;
 	}
 }
 
@@ -126,43 +130,50 @@ void printArray(int* a_)
 
 void choice3(int* arr1, int* arr2)
 {
-	cout << "Выберите массив. 1 или 2" << endl;
-	int choiceArr;
-	cin >> choiceArr;
-	if (choiceArr == 1)
+	switch(int choiceArr = chooseArray(choiceArr))
 	{
+	case 1:
 		printArray(arr1);
-	}
-	else
-	{
+		break;
+	case 2:
 		printArray(arr2);
+		break;
 	}
 }
 
 int search(int* a_)
 {
-	int x;
-	cin >> x;
-	int i = 0;
-	while (x != *(a_ + i))
+	int x = input(x);
+	int c = 0;
+	for (int i = 0; i < *(a_ - 2); ++i)
 	{
-		++i;
+		c = (x == *(a_ + i) ? c : ++c);
 	}
-	return *(a_ + i);
+	if (c != *(a_ - 2))
+	{
+		int j = 0;
+		while (x != *(a_ + j))
+		{
+			++j;
+		}
+		return j;
+	}
+	else
+	{
+		return -1;
+	}
 }
 
 void choice4(int* arr1, int* arr2)
 {
-	cout << "Выберите массив. 1 или 2" << endl;
-	int choiceArr;
-	cin >> choiceArr;
-	if (choiceArr == 1)
+	switch (int choiceArr = chooseArray(choiceArr))
 	{
+	case 1:
 		cout << search(arr1) << endl;
-	}
-	else
-	{
+		break;
+	case 2:
 		cout << search(arr2) << endl;
+		break;
 	}
 }
 
@@ -181,15 +192,14 @@ void add(int*& arr, int* addedArr)
 void choice5(int*& arr1, int*& arr2)
 {
 	cout << "Выберите массив, в который добавится невыбранный. 1 или 2" << endl;
-	int choiceArr;
-	cin >> choiceArr;
-	if (choiceArr == 1)
+	switch (int choiceArr = input(choiceArr))
 	{
+	case 1:
 		add(arr1, arr2);
-	}
-	else
-	{
+		break;
+	case 2:
 		add(arr2, arr1);
+		break;
 	}
 }
 
@@ -198,7 +208,7 @@ int* unify(int* a, int* b)
 	int* a_ = new int(*(a - 1) + *(b - 1) + 2);
 	a_ += 2;
 	*(a_ - 1) = *(a - 1) + *(b - 1);
-	*(a_ - 2) = *(a - 1) + *(b - 1);
+	*(a_ - 2) = *(a - 2) + *(b - 2);
 	for (int i = 0; i < (*(a - 1) * 2); i += 2)
 	{
 		*(a_ + i) = *(a + (i / 2));
@@ -213,28 +223,25 @@ int* unify(int* a, int* b)
 void choice6(int*& arr1, int*& arr2)
 {
 	cout << "Выберите массив, в который перейдет объединение. 1 или 2" << endl;
-	int choiceArr;
-	cin >> choiceArr;
-	if (choiceArr == 1)
+	switch(int choiceArr = input(choiceArr))
 	{
+	case 1:
 		deleteArray(arr1);
 		arr1 = unify(arr1, arr2);
-	}
-	else
-	{
+		break;
+	case 2:
 		deleteArray(arr2);
 		arr2 = unify(arr2, arr1);
+		break;
 	}
 }
 
 int insert(int*& a_)
 {
 	cout << "index = ";
-	int index;
-	cin >> index;
+	int index = input(index);
 	cout << "element = ";
-	int element;
-	cin >> element;
+	int element = input(element);
 
 	if (index >= *(a_ - 2))
 	{
@@ -256,37 +263,23 @@ int insert(int*& a_)
 
 void choice7(int*& arr1, int*& arr2)//вставка элемента в массив
 {
-	cout << "Выберите массив. 1 или 2" << endl;
-	int choiceArr;
-	cin >> choiceArr;
-	if (choiceArr == 1)
+	switch(int choiceArr = chooseArray(choiceArr))
 	{
+	case 1:
 		insert(arr1);
-		while (insert(arr1) == 1)
-		{
-			cout << "Данные некорректны";
-			insert(arr1);
-		}
-	}
-	else
-	{
+		break;
+	case 2:
 		insert(arr2);
-		while (insert(arr2) == 1)
-		{
-			cout << "Данные некорректны";
-			insert(arr2);
-		}
+		break;
 	}
 }
 
 int deleteGroup(int*& a_)
 {
 	cout << "индекс начала последовательности = ";
-	int startIndex;
-	cin >> startIndex;
+	int startIndex = input(startIndex);
 	cout << "количество элементов = ";
-	int n;
-	cin >> n;
+	int n = input(n);
 	if (startIndex >= *(a_ - 2))
 	{
 		return 1;
@@ -308,16 +301,14 @@ int deleteGroup(int*& a_)
 
 void choice8(int*& arr1, int*& arr2)//удаление последовательности
 {
-	cout << "Выберите массив. 1 или 2" << endl;
-	int choiceArr;
-	cin >> choiceArr;
-	if (choiceArr == 1)
+	switch (int choiceArr = chooseArray(choiceArr))
 	{
+	case 1:
 		deleteGroup(arr1);
-	}
-	else
-	{
+		break;
+	case 2:
 		deleteGroup(arr2);
+		break;
 	}
 }
 
@@ -358,25 +349,17 @@ int subSequence(int* a, int* b)
 
 void choice9(int* arr1, int* arr2)//поиск последовательности
 {
-	cout << "Выберите массив. 1 или 2" << endl;
-	int choiceArr;
-	cin >> choiceArr;
-	cout << "Введите искомую последовательность. Введение 0 остановит ввод" << endl;
-	int x = -1;
 	int* s_ = initArray(10);
-	do
+	cout << "Искомая последовательность: ";
+	addSomeElements(s_);
+	switch (int choiceArr = chooseArray(choiceArr))
 	{
-		cin >> x;
-		addElement(s_, x);
-	} while (x != 0);
-
-	if (choiceArr == 1)
-	{
+	case 1:
 		cout << "Индекс начала последовательности " << subSequence(arr1, s_) << endl;
-	}
-	else
-	{
+		break;
+	case 2:
 		cout << "Индекс начала последовательности " << subSequence(arr2, s_) << endl;
+		break;
 	}
 }
 
