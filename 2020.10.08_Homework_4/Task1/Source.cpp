@@ -100,6 +100,7 @@ void addSomeElements(ArrayList& a)
 	while (i <= n)
 	{
 		addElement(list);
+		++i;
 	}
 
 	if (a.addAll(list) != true)
@@ -123,6 +124,7 @@ void addSomeElementsFromIndex(ArrayList& a)
 	while (i <= n)
 	{
 		addElement(list);
+		++i;
 	}
 
 	if (a.addAll(index, list) != true)
