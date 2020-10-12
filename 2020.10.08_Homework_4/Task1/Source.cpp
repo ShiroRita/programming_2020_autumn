@@ -96,11 +96,9 @@ void addSomeElements(ArrayList& a)
 	int n = input(n);
 	ArrayList list(n);
 	cout << "введите элементы: ";
-	int i = 0;
-	while (i <= n)
+	for (int i = 0; i < n; ++i)
 	{
 		addElement(list);
-		++i;
 	}
 
 	if (a.addAll(list) != true)
@@ -120,11 +118,9 @@ void addSomeElementsFromIndex(ArrayList& a)
 	int index = input(index);
 	ArrayList list(n);
 	cout << "введите элементы: ";
-	int i = 0;
-	while (i <= n)
+	for (int i = 0; i < n; ++i)
 	{
 		addElement(list);
-		++i;
 	}
 
 	if (a.addAll(index, list) != true)
