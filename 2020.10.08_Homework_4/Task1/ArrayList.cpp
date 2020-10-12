@@ -132,7 +132,7 @@ int ArrayList::indexOf(int element)
 			for (int j = 0; j < count; ++j)
 			{
 				i = (*(data + j) == element ? ++i : i);
-				index == (i == 1 ? j : index);
+				index = (i == 1 ? j : index);
 			}
 		}
 	}
