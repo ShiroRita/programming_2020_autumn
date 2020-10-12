@@ -35,6 +35,7 @@ bool ArrayList::add(int element)
 {
 	if (count == capacity)
 	{
+		expand(data, capacity);
 		return false;
 	}
 	else
@@ -49,6 +50,7 @@ bool ArrayList::add(int index, int element)
 {
 	if (count == capacity)
 	{
+		expand(data, capacity);
 		return false;
 	}
 	else
@@ -63,6 +65,7 @@ bool ArrayList::addAll(ArrayList& list)
 {
 	if (count + list.count == capacity)
 	{
+		expand(data, capacity);
 		return false;
 	}
 	else
@@ -81,6 +84,7 @@ bool ArrayList::addAll(int index, ArrayList& list)
 {
 	if (count + 1 + list.count == capacity)
 	{
+		expand(data, capacity);
 		return false;
 	}
 	else

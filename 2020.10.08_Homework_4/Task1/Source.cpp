@@ -18,37 +18,149 @@ void printMenu()
 	cout << "7 - Добавить несколько элементов, начиная с некоторой позиции" << endl;
 }
 
+int input(int& i)
+{
+	cin >> i;
+	return i;
+}
+
+void addElement(ArrayList& a)
+{
+	int element = input(element);
+	if (a.add(element) != true)
+	{
+		while (a.add(element) != true)
+		{
+			a.add(element);
+		}
+	}
+}
+
+void addElementToIndex(ArrayList& a)
+{
+	int element = input(element);
+	int index = input(index);
+
+	if (a.add(element, index) != true)
+	{
+		while (a.add(element, index) != true)
+		{
+			a.add(element, index);
+		}
+	}
+}
+
+void deleteElement(ArrayList& a)
+{
+	int index = input(index);
+
+	if (a.remove(index) != true)
+	{
+		while (a.remove(index) != true)
+		{
+			a.remove(index);
+		}
+	}
+}
+
+void search(ArrayList a)
+{
+	cout << "1 - поиск по содержимому" << endl;
+	cout << "2 - поиск по индексу" << endl;
+	switch (int choice = input(choice))
+	{
+	case 1:
+		int element = input(element);
+		cout << a.indexOf(element) << endl;
+		break;
+	case 2:
+		int index = input(index);
+		cout << a.get(index) << endl;
+		break;
+	}
+}
+
+void addSomeElements(ArrayList& a)
+{
+	cout << "количество вводимых элементов: ";
+	int n = input(n);
+	ArrayList list(n);
+	cout << "введите элементы: ";
+	int i = 0;
+	while (i <= n)
+	{
+		addElement(list);
+	}
+
+	if (a.addAll(list) != true)
+	{
+		while (a.addAll(list) != true)
+		{
+			a.addAll(list);
+		}
+	}
+}
+
+void addSomeElementsFromIndex(ArrayList& a)
+{
+	cout << "количество вводимых элементов: ";
+	int n = input(n);
+	cout << "индекс начальной позиции: ";
+	int index = input(index);
+	ArrayList list(n);
+	cout << "введите элементы: ";
+	int i = 0;
+	while (i <= n)
+	{
+		addElement(list);
+	}
+
+	if (a.addAll(index, list) != true)
+	{
+		while (a.addAll(index, list) != true)
+		{
+			a.addAll(index, list);
+		}
+	}
+}
+
 void processChoice(ArrayList& a, int choice)
 {
 	switch (choice)
 	{
 	case 1:
 	{
-		
+		a.print();
 	}
 	break;
 	case 2:
 	{
+		addElement(a);
 	}
 	break;
 	case 3:
 	{
+		addElementToIndex(a);
 	}
 	break;
 	case 4:
 	{
+		deleteElement(a);
 	}
 	break;
 	case 5:
 	{
+		search(a);
 	}
 	break;
 	case 6:
 	{
+		addSomeElements(a);
 	}
 	break;
 	case 7:
 	{
+		addSomeElementsFromIndex(a);
 	}
 	break;
 	}
@@ -59,6 +171,7 @@ int main()
 	srand(time(NULL));
 	setlocale(LC_ALL, "Russian");
 	ArrayList a;
+
 
 	int choice = 0;
 	do
