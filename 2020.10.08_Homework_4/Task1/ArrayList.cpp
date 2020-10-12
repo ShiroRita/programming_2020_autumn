@@ -40,7 +40,7 @@ bool ArrayList::add(int element)
 	}
 	else
 	{
-		*(data + count - 1) = element;
+		*(data + count) = element;
 		++count;
 		return true;
 	}
@@ -149,7 +149,7 @@ void ArrayList::print()
 	printf("[%d/%d]{", count, capacity);
 	for (int i = 0; i < count; ++i)
 	{
-		printf("%d%s", data[i], (i == count - 1 ? "" : ", "));
+		printf("%d%s", *(data + i), (i == count - 1 ? "" : ", "));
 	}
 	printf("}\n");
 }

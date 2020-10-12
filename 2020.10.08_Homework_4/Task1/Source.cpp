@@ -63,6 +63,18 @@ void deleteElement(ArrayList& a)
 	}
 }
 
+void sElement(ArrayList a)
+{
+	int element = input(element);
+	cout << a.indexOf(element) << endl;
+}
+
+void sIndex(ArrayList a)
+{
+	int index = input(index);
+	cout << a.get(index) << endl;
+}
+
 void search(ArrayList a)
 {
 	cout << "1 - поиск по содержимому" << endl;
@@ -70,12 +82,10 @@ void search(ArrayList a)
 	switch (int choice = input(choice))
 	{
 	case 1:
-		int element = input(element);
-		cout << a.indexOf(element) << endl;
+		sElement(a);
 		break;
 	case 2:
-		int index = input(index);
-		cout << a.get(index) << endl;
+		sIndex(a);
 		break;
 	}
 }
