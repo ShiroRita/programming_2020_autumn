@@ -27,27 +27,16 @@ int input(int& i)
 void addElement(ArrayList& a)
 {
 	int element = input(element);
-	if (a.add(element) != true)
-	{
-		while (a.add(element) != true)
-		{
-			a.add(element);
-		}
-	}
+	a.add(element);	
 }
 
 void addElementToIndex(ArrayList& a)
 {
+	cout << "элемент";
 	int element = input(element);
+	cout << "позиция";
 	int index = input(index);
-
-	if (a.add(element, index) != true)
-	{
-		while (a.add(element, index) != true)
-		{
-			a.add(element, index);
-		}
-	}
+	a.add(element, index);
 }
 
 void deleteElement(ArrayList& a)

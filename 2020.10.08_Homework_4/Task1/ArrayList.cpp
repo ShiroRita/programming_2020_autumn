@@ -36,14 +36,10 @@ bool ArrayList::add(int element)
 	if (count == capacity)
 	{
 		expand(data, capacity);
-		return false;
 	}
-	else
-	{
-		*(data + count) = element;
-		++count;
-		return true;
-	}
+	*(data + count) = element;
+	++count;
+	return true;
 }
 
 bool ArrayList::add(int index, int element)
@@ -51,59 +47,49 @@ bool ArrayList::add(int index, int element)
 	if (count == capacity)
 	{
 		expand(data, capacity);
-		return false;
 	}
-	else
+	++count;
+	for (int i = count - 1; i > index; --i)
 	{
-		*(data + index) = element;
-		++count;
-		return true;
+		*(data + i) = *(data - 1 + i);
 	}
+	*(data + index) = element;
+	return true;
 }
 
 bool ArrayList::addAll(ArrayList& list)
 {
-	if (count + list.count == capacity)
+	if (count + list.count >= capacity)
 	{
 		expand(data, capacity);
-		return false;
 	}
-	else
+	for (int i = 0; i < list.count; ++i)
 	{
-		for (int i = 0; i < list.count; ++i)
-		{
-			*(data + count + i) = *(list.data + i);
-			++count;
-		}
-		clear(list);
-		return true;
+		*(data + count + i) = *(list.data + i);
 	}
+	count += list.count;
+	clear(list);
+	return true;
 }
 
 bool ArrayList::addAll(int index, ArrayList& list)
 {
-	if (count + 1 + list.count == capacity)
+	if (count + list.count >= capacity)
 	{
 		expand(data, capacity);
-		return false;
 	}
-	else
+	for (int i = index; i < count; ++i)
 	{
-		for (int i = 0; i < list.count; ++i)
-		{
-			*(data + count) = *(data + index + i);
-			*(data + index + i) = *(list.data + i);
-			*(list.data + i) = *(data + count);
-			addAll(list);
-		}
-		return true;
+		list.add(data[i]);
 	}
+	count = index;
+	addAll(list);
+	return true;
 }
 
 void ArrayList::clear(ArrayList& list)
 {
 	list.count = 0;
-	delete[] list.data;
 }
 
 bool ArrayList::contains(int element)
@@ -126,14 +112,11 @@ int ArrayList::indexOf(int element)
 	int index = -1;
 	if (isEmpty() == false)
 	{
-		if (element < count)
+		int i = 0;
+		for (int j = 0; j < count; ++j)
 		{
-			int i = 0;
-			for (int j = 0; j < count; ++j)
-			{
-				i = (*(data + j) == element ? ++i : i);
-				index = (i == 1 ? j : index);
-			}
+			i = (*(data + j) == element ? 1 : 0);
+			index = (i == 1 ? j : index);
 		}
 	}
 	return index;
@@ -156,21 +139,14 @@ void ArrayList::print()
 
 bool ArrayList::remove(int index)
 {
-	if (isEmpty() == true)
-	{
-		if (index < count)
-		{	
-			for (int i = index; i < count - 1; ++i)
-			{
-				*(data + i) = *(data + i + 1);
-			}
-			--count;
-			return true;
-		}
-		else
+	if (isEmpty() == false | index < count)
+	{	
+		for (int i = index; i < count - 1; ++i)
 		{
-			return false;
+			*(data + i) = *(data + i + 1);
 		}
+		--count;
+		return true;
 	}
 	else
 	{
