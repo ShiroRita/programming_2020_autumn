@@ -54,11 +54,13 @@ void deleteElement(ArrayList& a)
 
 void sElement(ArrayList a)
 {
+	cout << "введите содержимое: ";
 	cout << a.indexOf(input()) << endl;
 }
 
 void sIndex(ArrayList a)
 {
+	cout << "введите индекс: ";
 	cout << a.get(input()) << endl;
 }
 
@@ -88,13 +90,7 @@ void addSomeElements(ArrayList& a)
 		addElement(list);
 	}
 
-	if (a.addAll(list) != true)
-	{
-		while (a.addAll(list) != true)
-		{
-			a.addAll(list);
-		}
-	}
+	a.addAll(list);
 }
 
 void addSomeElementsFromIndex(ArrayList& a)
@@ -110,13 +106,7 @@ void addSomeElementsFromIndex(ArrayList& a)
 		addElement(list);
 	}
 
-	if (a.addAll(index, list) != true)
-	{
-		while (a.addAll(index, list) != true)
-		{
-			a.addAll(index, list);
-		}
-	}
+	a.addAll(index, list);
 }
 
 void processChoice(ArrayList& a, int choice)
