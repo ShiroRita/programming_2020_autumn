@@ -18,30 +18,30 @@ void printMenu()
 	cout << "7 - Добавить несколько элементов, начиная с некоторой позиции" << endl;
 }
 
-int input(int& i)
+int input()
 {
+	int i = 0;
 	cin >> i;
 	return i;
 }
 
 void addElement(ArrayList& a)
 {
-	int element = input(element);
-	a.add(element);	
+	a.add(input());	
 }
 
 void addElementToIndex(ArrayList& a)
 {
 	cout << "элемент";
-	int element = input(element);
+	int element = input();
 	cout << "позиция";
-	int index = input(index);
+	int index = input();
 	a.add(element, index);
 }
 
 void deleteElement(ArrayList& a)
 {
-	int index = input(index);
+	int index = input();
 
 	if (a.remove(index) != true)
 	{
@@ -54,21 +54,19 @@ void deleteElement(ArrayList& a)
 
 void sElement(ArrayList a)
 {
-	int element = input(element);
-	cout << a.indexOf(element) << endl;
+	cout << a.indexOf(input()) << endl;
 }
 
 void sIndex(ArrayList a)
 {
-	int index = input(index);
-	cout << a.get(index) << endl;
+	cout << a.get(input()) << endl;
 }
 
 void search(ArrayList a)
 {
 	cout << "1 - поиск по содержимому" << endl;
 	cout << "2 - поиск по индексу" << endl;
-	switch (int choice = input(choice))
+	switch (int choice = input())
 	{
 	case 1:
 		sElement(a);
@@ -82,7 +80,7 @@ void search(ArrayList a)
 void addSomeElements(ArrayList& a)
 {
 	cout << "количество вводимых элементов: ";
-	int n = input(n);
+	int n = input();
 	ArrayList list(n);
 	cout << "введите элементы: ";
 	for (int i = 0; i < n; ++i)
@@ -102,9 +100,9 @@ void addSomeElements(ArrayList& a)
 void addSomeElementsFromIndex(ArrayList& a)
 {
 	cout << "количество вводимых элементов: ";
-	int n = input(n);
+	int n = input();
 	cout << "индекс начальной позиции: ";
-	int index = input(index);
+	int index = input();
 	ArrayList list(n);
 	cout << "введите элементы: ";
 	for (int i = 0; i < n; ++i)

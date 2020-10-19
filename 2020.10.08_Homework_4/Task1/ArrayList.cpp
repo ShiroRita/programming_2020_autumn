@@ -59,25 +59,15 @@ bool ArrayList::add(int index, int element)
 
 bool ArrayList::addAll(ArrayList& list)
 {
-	if (count + list.count >= capacity)
-	{
-		expand(data, capacity);
-	}
 	for (int i = 0; i < list.count; ++i)
 	{
-		*(data + count + i) = *(list.data + i);
+		add(list.data[i]);
 	}
-	count += list.count;
-	clear(list);
 	return true;
 }
 
 bool ArrayList::addAll(int index, ArrayList& list)
 {
-	if (count + list.count >= capacity)
-	{
-		expand(data, capacity);
-	}
 	for (int i = index; i < count; ++i)
 	{
 		list.add(data[i]);
@@ -104,27 +94,24 @@ bool ArrayList::contains(int element)
 
 int ArrayList::get(int index)
 {
-	return (isEmpty() == false ? (index < count ? *(data + index) : - 1) : -1);
+	return (!isEmpty() ? (index < count ? *(data + index) : -1) : -1);
 }
 
 int ArrayList::indexOf(int element)
 {
-	int index = -1;
-	if (isEmpty() == false)
+	for (int j = 0; j < count; ++j)
 	{
-		int i = 0;
-		for (int j = 0; j < count; ++j)
+		if (data[j] == element)
 		{
-			i = (*(data + j) == element ? 1 : 0);
-			index = (i == 1 ? j : index);
+			return j;
 		}
 	}
-	return index;
+	return -1;
 }
 
 bool ArrayList::isEmpty()
 {
-	return (count != 0 ? false : true);
+	return (count == 0);
 }
 
 void ArrayList::print()
@@ -139,47 +126,26 @@ void ArrayList::print()
 
 bool ArrayList::remove(int index)
 {
-	if (isEmpty() == false | index < count)
-	{	
-		for (int i = index; i < count - 1; ++i)
-		{
-			*(data + i) = *(data + i + 1);
-		}
-		--count;
-		return true;
-	}
-	else
+	if (index < 0 || index > count)
 	{
 		return false;
 	}
+	for (int i = index; i < count - 1; ++i)
+	{
+		*(data + i) = *(data + i + 1);
+	}
+	--count;
+	return true;
 }
 
 int ArrayList::swap(int index1, int index2)
 {
-	if (isEmpty() == true)
-	{
-		if (index1 < count)
-		{
-			if (index2 < count)
-			{
-				int t = 0;
-				t = *(data + index1);
-				*(data + index1) = *(data + index2);
-				*(data + index2) = t;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			return false;
-		}
-	}
-	else
+	if (index1 < 0 || index2 < 0 || index1 > count || index2 > count)
 	{
 		return false;
 	}
+	int t = *(data + index1);
+	*(data + index1) = *(data + index2);
+	*(data + index2) = t;
+	return true;
 }
