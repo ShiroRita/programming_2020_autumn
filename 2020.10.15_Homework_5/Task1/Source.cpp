@@ -187,10 +187,11 @@ int main()
 	int choice = -1;
 	while (choice != 0)
 	{
+		system("cls");
 		printMenu();
 		cin >> choice;
 		processChoice(a, choice);
-
+		system("pause");
 	}
 	return EXIT_SUCCESS;
 }

@@ -185,11 +185,15 @@ char* ArrayList::toString()
 	addSymbolToStr(index, ']');
 	addSymbolToStr(index, ' ');
 	addSymbolToStr(index, '{');
-	for (int i = 0; i < count; i++)
+	for (int i = 0; i < count - 1; i++)
 	{
 		addNumberToStr(index, data[i]);
-		addSymbolToStr(index, (i == count - 1 ? '}' : ', '));
+		addSymbolToStr(index, ',');
+		addSymbolToStr(index, ' ');
 	}
+	addNumberToStr(index, data[count - 1]);
+	addSymbolToStr(index, '}');
+	addSymbolToStr(index, '\0');
 	return str;
 }
 
