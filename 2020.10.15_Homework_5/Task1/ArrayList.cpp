@@ -3,6 +3,10 @@
 ArrayList::~ArrayList()
 {
 	delete[] data;
+	/*if (str != nullptr)
+	{
+		delete[] str;
+	}*/
 }
 
 void ArrayList::expand()
@@ -20,22 +24,15 @@ void ArrayList::expand()
 int ArrayList::numLength(int number)
 {
 	int result = 1;
-	if (number >= 0)
+	if (number < 0)
 	{
-		while (number > 9)
-		{
-			number /= 10;
-			result++;
-		}
+		++result;
+		number *= -1;
 	}
-	else
+	while (number > 9)
 	{
-		result = 2;
-		while (number < -9)
-		{
-			number /= 10;
-			--result;
-		}
+		number /= 10;
+		result++;
 	}
 	return result;
 }
@@ -46,7 +43,7 @@ void ArrayList::addSymbolToStr(int& index, char symbol)
 	++index;
 }
 
-void ArrayList::addNumberToStr(int& index, int number)//если не получится - попробовать через умножение на -1
+void ArrayList::addNumberToStr(int& index, int number)
 {
 	int length = numLength(number);
 	if (number >= 0)
@@ -61,6 +58,7 @@ void ArrayList::addNumberToStr(int& index, int number)//если не получится - попр
 	else
 	{
 		addSymbolToStr(index, '-');
+		number *= -1;
 		for (int i = 0; i < length - 1; ++i)
 		{
 			int digit = number % 10;
@@ -171,7 +169,7 @@ char* ArrayList::toString()
 		delete[] str;
 		str = nullptr;
 	}
-	int length = 6 + numLength(count) + numLength(capacity) + 2 * (count - 2); 
+	int length = 6 + numLength(count) + numLength(capacity) + 2 * (count - 1); 
 	for (int i = 0; i < count; ++i)
 	{
 		length += numLength(data[i]);

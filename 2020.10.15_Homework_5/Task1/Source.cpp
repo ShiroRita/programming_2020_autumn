@@ -1,4 +1,6 @@
 #include <iostream>
+#include<ctime>
+#include<clocale>
 #include "ArrayList.h"
 
 using namespace std;
@@ -66,7 +68,7 @@ void choice1(ArrayList& a)
 		}
 		for (int i = 0; i < 10; ++i)
 		{
-			a.set(input(), rand() % (20 - 10 + 1) + 10);
+			a.set(input(), list.get(i));
 		}
 	}
 	break;
@@ -101,7 +103,7 @@ void choice2(ArrayList& a)
 		cout << "¬ведите индексы" << endl;
 		for (int i = 0; i < 10; ++i)
 		{
-			a.set(input(), (rand() % (20 - 10 + 1) + 10) * (-1));
+			a.set(input(), list.get(i));
 		}
 	}
 	break;
@@ -181,6 +183,7 @@ void processChoice(ArrayList& a, int choice)
 
 int main()
 {
+	srand(time(NULL));
 	setlocale(LC_ALL, "Russian");
 
 	ArrayList a;
