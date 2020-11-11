@@ -9,10 +9,10 @@ void printMenu()
 {
 	cout << "МЕНЮ" << endl;
 	cout << "0 - Выход из программы" << endl;
-	cout << "1 - Добавить в список 10 случайных положительных двузначных чисел и вывести список" << endl;
-	cout << "2 - Добавить в список 10 случайных отрицательных двузначных чисел и вывести список" << endl;
-	cout << "3 - Поменять местами первый минимальный и последний максимальный элемент и вывести список" << endl;
-	cout << "4 - Перемешать все элементы массива и вывести массив" << endl;
+	cout << "1 - Добавить в список 10 случайных положительных двузначных чисел" << endl;
+	cout << "2 - Добавить в список 10 случайных отрицательных двузначных чисел" << endl;
+	cout << "3 - Поменять местами первый минимальный и последний максимальный элемент" << endl;
+	cout << "4 - Перемешать все элементы массива" << endl;
 	cout << "5 - Заменить каждый отрицательный элемент массива на 0" << endl;
 }
 
@@ -38,12 +38,12 @@ void printArray(ArrayList a)
 	cout << endl << a.toString() << endl;
 }
 
-void choice1(ArrayList& a)
+void choice1(ArrayList& a)//Добавить в список 10 случайных положительных двузначных чисел и вывести список
 {
 	ArrayList list;
 	for (int i = 0; i < 10; ++i)
 	{
-		list.add(rand() % (20 - 10 + 1) + 10);
+		list.add(rand() % (99 - 10 + 1) + 10);
 	}
 	
 	switch (int choice = choiceForAdd())
@@ -76,12 +76,12 @@ void choice1(ArrayList& a)
 	printArray(a);
 }
 
-void choice2(ArrayList& a)
+void choice2(ArrayList& a)//Добавить в список 10 случайных отрицательных двузначных чисел и вывести список
 {
 	ArrayList list;
 	for (int i = 0; i < 10; ++i)
 	{
-		list.add((rand() % (20 - 10 + 1) + 10) * (-1));
+		list.add((rand() % (99 - 10 + 1) + 10) * (-1));
 	}
 
 	switch (int choice = choiceForAdd())
@@ -111,7 +111,7 @@ void choice2(ArrayList& a)
 	printArray(a);
 }
 
-void choice3(ArrayList& a)
+void choice3(ArrayList& a)//Поменять местами первый минимальный и последний максимальный элемент и вывести список
 {
 	int min = a.get(0);
 	for (int i = 0; i < a.length(); ++i)
@@ -129,7 +129,7 @@ void choice3(ArrayList& a)
 	printArray(a);
 }
 
-void choice4(ArrayList& a)
+void choice4(ArrayList& a)//Перемешать все элементы массива и вывести массив
 {
 	for (int i = 0; i < a.length(); ++i)
 	{
@@ -138,7 +138,7 @@ void choice4(ArrayList& a)
 	printArray(a);
 }
 
-void choice5(ArrayList& a)
+void choice5(ArrayList& a)//Заменить каждый отрицательный элемент массива на 0
 {
 	for (int i = 0; i < a.length(); ++i)
 	{

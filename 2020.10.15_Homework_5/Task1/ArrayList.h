@@ -8,9 +8,11 @@ private:
 
 public:
 	ArrayList(int capacity = 10) :count(0), capacity(capacity), data(new int[capacity]), str(nullptr) {}
+	ArrayList(const ArrayList& list);
 	~ArrayList();
 
 private:
+	bool indexValid(int index);
 	void expand();
 	int numLength(int number);
 	void addSymbolToStr(int& index, char symbol);
