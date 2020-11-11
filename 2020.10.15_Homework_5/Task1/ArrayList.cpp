@@ -112,11 +112,11 @@ bool ArrayList::add(int index, int element)
 	{
 		expand();
 	}
-	++count;
 	for (int i = count; i > index; --i)
 	{
 		data[i] = data[i - 1];
 	}
+	++count;
 	data[index] = element;
 	return true;
 }
