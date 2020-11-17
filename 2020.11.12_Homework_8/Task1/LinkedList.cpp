@@ -321,43 +321,92 @@ int LinkedList::indexOf(int element)
 
 bool LinkedList::contains(int element)
 {
-	return (indexOf(element) != -1 ? true : false);
+	return (indexOf(element) != -1);
 }
 
-/*bool LinkedList::swap(int index1, int index2)
+bool LinkedList::swap(int index1, int index2)
 {
 	if (!indexValid(index1) || !indexValid(index2))
 	{
 		return false;
 	}
-	Node* temp1 = head;
-	int i = 0;
-	while (i < index1 - 1)
+	if (index1 > index2)
 	{
-		temp1 = temp1->next;
-		++i;
+		int t = index1;
+		index1 = index2;
+		index2 = t;
 	}
-	Node* node1 = temp1;
-	temp1 = temp1->next;
-	++i; //i = index1;
-	Node* node1_1 = temp1->next;
-	while (i < index2 - 1)
+	if ((index1 == 0))
 	{
-		temp1 = temp1->next;
-		++i;
+		if (index2 > 1)
+		{
+			Node* temp = head;
+			Node* headNext = head->next;
+			while (index2 > 1)
+			{
+				temp = temp->next;
+				--index2;
+			}
+			Node* node = temp;
+			temp = temp->next;
+			node->next = head;
+			node = node->next;
+			node->next = temp->next;
+			head = temp;
+			head->next = headNext;
+		}
+		else
+		{
+			Node* temp = head->next;
+			head->next = temp->next;
+			temp->next = head;
+			head = temp;
+		}
 	}
-	Node* node2 = temp1;
-	temp1 = temp1->next;
-	++i; //i = index2;
-	node2->next = node1->next;
-	node2 = node2->next;
-	node1->next = temp1->next;
-	node1 = node1->next;
-	node1->next = node1_1;
-	node2->next = temp1->next;
-	
+	else
+	{
+		if ((index2 - index1) != 1)
+		{
+			Node* temp = head;
+			int i = 0;
+			while (i < index1 - 1)
+			{
+				temp = temp->next;
+				++i;
+			}
+			Node* node1 = temp;
+			temp = temp->next;
+			++i; //i == index1;
+			Node* node1_1 = temp->next;
+			while (i < index2 - 1)
+			{
+				temp = temp->next;
+				++i;
+			}
+			Node* node2 = temp;
+			temp = temp->next;// temp == list[index2];
+			node2->next = node1->next;
+			node2 = node2->next;
+			node2->next = temp->next;
+			node1->next = temp;
+			temp->next = node1_1;
+		}
+		else
+		{
+			Node* temp = head;
+			for (int i = 0; i < index1 - 1; ++i)
+			{
+				temp = temp->next;//temp == list[index1 - 1]
+			}
+			Node* node1 = temp->next; // node1 == list[index1]
+			Node* node2 = node1->next;// node2 == list[index2]
+			node1->next = node2->next;
+			node2->next = node1;
+			temp->next = node2;
+		}
+	}
 	return true;
-}*/
+}
 
 std::ostream& operator<<(std::ostream& stream, const LinkedList list)
 {

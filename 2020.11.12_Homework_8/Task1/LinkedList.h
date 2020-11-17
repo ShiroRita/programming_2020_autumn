@@ -74,13 +74,13 @@ public:
 	/// </summary>
 	/// <param name="">значение искомого</param>
 	/// <returns>-1, если элемента в списке нет</returns>
-	int indexOf(int);
+	int indexOf(int element);
 
 	/// <summary>
 	/// содержится ли элемент в списке. в функции нужно обойтись одной строкой
 	/// </summary>
 	/// <param name="">значение элемента</param>
-	bool contains(int);
+	bool contains(int element);
 
 	/// <summary>
 	/// поменять два элемента местами.
@@ -90,7 +90,7 @@ public:
 	/// <param name="">индекс первого элемента</param>
 	/// <param name="">индекс второго элемента</param>
 	/// <returns>false - если индексы были некорректны</returns>
-	/*bool swap(int index1, int index2);*/
+	bool swap(int index1, int index2);
 
 
 

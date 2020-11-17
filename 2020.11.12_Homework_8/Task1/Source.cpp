@@ -1,18 +1,21 @@
 #include<iostream>
+#include<ctime>
+#include<clocale>
 #include"LinkedList.h"
+#include "Source.h"
 using namespace std;
 
 void printList(LinkedList list)
 {
-	cout << list << endl;
+	cout << list << endl << endl;
 }
 
-/*int input()
+int input()
 {
 	int i = 0;
 	cin >> i;
 	return i;
-}*/
+}
 
 void clear(LinkedList& list)
 {
@@ -22,93 +25,455 @@ void clear(LinkedList& list)
 	}
 }
 
+void printMenu()
+{
+	cout << "  MENU" << endl << endl;
+	cout << "0) Exit" << endl;
+	cout << "1) From Lesson8" << endl;
+	cout << "2) extractHead" << endl;
+	cout << "3) extractTail" << endl;
+	cout << "4) extract(index)" << endl;
+	cout << "5) indexOf" << endl;
+	cout << "6) contains" << endl;
+	cout << "7) swap" << endl;
+	cout << "8) list1 = list2" << endl;
+}
+
+void checkProcessMenu()
+{
+	cout << "1 - clear list" << endl;
+	cout << "2 - input an element" << endl;
+	cout << "3 - input some elements" << endl;
+	cout << "4 - continue without changes" << endl;
+}
+
+void extractHeadFn(LinkedList& list)
+{
+	printList(list);
+	cout << "ExtractHead: " << list.extractHead() << endl;
+	cout << "list: " << list << endl;
+}
+
+void extractTailFn(LinkedList& list)
+{
+	printList(list);
+	cout << "ExtractTail: " << list.extractTail() << endl;
+	cout << "list: " << list << endl;
+}
+
+void extractFn(LinkedList& list)
+{
+	printList(list);
+	cout << "index: ";
+	int index = input();
+	cout << "Extract: " << list.extract(index) << endl;
+	cout << "list: " << list << endl;
+}
+
+void indexOfFn(LinkedList& list)
+{
+	printList(list);
+	cout << "index of ";
+	int element = input();
+	cout << ": " << list.indexOf(element) << endl;
+}
+
+void containsFn(LinkedList& list)
+{
+	printList(list);
+	cout << "element: ";
+	cout << (list.contains(input()) ? "yes" : "no");
+}
+
+void swapFn(LinkedList& list)
+{
+	printList(list);
+	cout << "1 - by index numbers" << endl;
+	cout << "2 - elements" << endl;
+	switch (input())
+	{
+	case 1:
+	{
+		cout << "index numbers: " << endl;
+		list.swap(input(), input());
+		printList(list);
+	}
+	break;
+	case 2:
+	{
+		cout << "elements: " << endl;
+		list.swap(list.indexOf(input()), list.indexOf(input()));
+		printList(list);
+	}
+	break;
+	}
+	
+}
+
+void choice8(LinkedList& list1, LinkedList list2)
+{
+	printList(list1);
+	cout << "list1 = list2: " << endl;
+	list1 = list2;
+	cout << "list1: " << list1 << endl;
+}
+
+void processChoice(int choice, LinkedList& list)
+{
+	switch (choice)
+	{
+	case 1:
+	{	
+		printList(list);
+
+		cout << "1 - addToHead" << endl;
+		cout << "2 - addToTail" << endl;
+		cout << "3 - add(index, element)" << endl;
+		cout << "4 - get(index)" << endl;
+		cout << "5 - set(index, element)" << endl;
+		
+		switch (input())
+		{
+		case 1:
+		{
+			cout << "addToHead: ";
+			list.addToHead(input());
+			printList(list);
+		}
+		break;
+		case 2:
+		{
+			cout << "addToTail: ";
+			list.addToTail(input());
+			printList(list);
+		}
+		break;
+		case 3:
+		{
+			cout << "(add) index = ";
+			int index = input();
+			cout << "element = ";
+			int element = input();
+			list.add(index, element);
+			printList(list);
+		}
+		break;
+		case 4:
+		{
+			cout << "get: ";
+			cout << list.get(input()) << endl;
+
+		}
+		break;
+		case 5:
+		{
+			cout << "(set) index = ";
+			int index = input();
+			cout << "element = ";
+			int element = input();
+			list.set(index, element);
+			printList(list);
+		}
+		break;
+		}
+		
+	}
+	break;
+	case 2: //extractHead
+	{
+		checkProcessMenu();
+
+		switch (input())
+		{
+		case 1:
+		{
+			clear(list);
+			extractHeadFn(list);
+		}
+		break;
+		case 2:
+		{
+			cout << "input an element: ";
+			list += input();
+			extractHeadFn(list);
+		}
+		break;
+		case 3:
+		{
+			cout << "amount of elements: ";
+			for (int i = input(); i > 0; --i)
+			{
+				cout << "element ";
+				list += input();
+			}
+			extractHeadFn(list);
+		}
+		break;
+		case 4:
+		{
+			extractHeadFn(list);
+		}
+		break;
+		}
+	}
+	break;
+	case 3: //extractTail
+	{
+		checkProcessMenu();
+
+		switch (input())
+		{
+		case 1:
+		{
+			clear(list);
+			extractTailFn(list);
+		}
+		break;
+		case 2:
+		{
+			cout << "input an element: ";
+			list += input();
+			extractTailFn(list);
+		}
+		break;
+		case 3:
+		{
+			cout << "amount of elements: ";
+			for (int i = input(); i > 0; --i)
+			{
+				cout << "element ";
+				list += input();
+			}
+			extractTailFn(list);
+		}
+		break;
+		case 4:
+		{
+			extractTailFn(list);
+		}
+		break;
+		}	
+	}
+	break;
+	case 4: //extract
+	{
+		checkProcessMenu();
+
+		switch (input())
+		{
+		case 1:
+		{
+			clear(list);
+			extractFn(list);
+		}
+		break;
+		case 2:
+		{
+			cout << "input an element: ";
+			list += input();
+			extractFn(list);
+		}
+		break;
+		case 3:
+		{
+			cout << "amount of elements: ";
+			for (int i = input(); i > 0; --i)
+			{
+				cout << "element ";
+				list += input();
+			}
+			extractFn(list);
+		}
+		break;
+		case 4:
+		{
+			extractFn(list);
+		}
+		break;
+		}
+	}
+	break;
+	case 5: //indexOf
+	{
+		checkProcessMenu();
+
+		switch (input())
+		{
+		case 1:
+		{
+			clear(list);
+			indexOfFn(list);
+		}
+		break;
+		case 2:
+		{
+			cout << "input an element: ";
+			list += input();
+			indexOfFn(list);
+		}
+		break;
+		case 3:
+		{
+			cout << "amount of elements: ";
+			for (int i = input(); i > 0; --i)
+			{
+				cout << "element ";
+				list += input();
+			}
+			indexOfFn(list);
+		}
+		case 4:
+		{
+			indexOfFn(list);
+		}
+		break;
+		}
+	}
+	break;
+	case 6: //contains
+	{
+		checkProcessMenu();
+
+		switch (input())
+		{
+		case 1:
+		{
+			clear(list);
+			containsFn(list);
+		}
+		break;
+		case 2:
+		{
+			cout << "input an element: ";
+			list += input();
+			containsFn(list);
+		}
+		break;
+		case 3:
+		{
+			cout << "amount of elements: ";
+			for (int i = input(); i > 0; --i)
+			{
+				cout << "element ";
+				list += input();
+			}
+			containsFn(list);
+		}
+		break;
+		case 4:
+		{
+			containsFn(list);
+		}
+		break;
+		}
+	}
+	break;
+	case 7://swap
+	{
+		checkProcessMenu();
+
+		switch (input())
+		{
+		case 1:
+		{
+			clear(list);
+			swapFn(list);
+		}
+		break;
+		case 2:
+		{
+			cout << "input an element: ";
+			list += input();
+			swapFn(list);
+		}
+		break;
+		case 3:
+		{
+			cout << "amount of elements: ";
+			for (int i = input(); i > 0; --i)
+			{
+				cout << "element ";
+				list += input();
+			}
+			swapFn(list);
+		}
+		break;
+		case 4:
+		{
+			swapFn(list);
+		}
+		break;
+		}
+	}
+	break;
+	case 8://list1 = list2
+	{
+		LinkedList list2;
+		cout << "amount of elements of list2: ";
+		for (int i = input(); i > 0; --i)
+		{
+			cout << "element ";
+			list2 += input();
+		}
+		cout << "list2: " << list2 << endl << endl;
+
+		cout << "list1: " << list << endl << endl;
+		checkProcessMenu();
+
+		switch (input())
+		{
+		case 1:
+		{
+			clear(list);
+			choice8(list, list2);
+		}
+		break;
+		case 2:
+		{
+			cout << "input an element: ";
+			list += input();
+			choice8(list, list2);
+		}
+		break;
+		case 3:
+		{
+			cout << "amount of elements: ";
+			for (int i = input(); i > 0; --i)
+			{
+				cout << "element ";
+				list += input();
+			}
+			choice8(list, list2);
+		}
+		break;
+		case 4:
+		{
+			choice8(list, list2);
+		}
+		break;
+		}
+	}
+	break;
+	}
+}
+
 int main()
 {
 	LinkedList list;
-	printList(list);
-	cout << endl << "index of 7: " << list.indexOf(7) << endl;
-
-	list += 9; list += 8; list += 7; list += 6; list += 5; list += 4;
-
-	cout << endl << "index of 7: " << list.indexOf(7) << endl;
-	cout << "index of 3: " << list.indexOf(3) << endl;
-	cout << endl;
 	
-	cout << list << " -> " << list.extractTail();
+	srand(time(NULL));
+	setlocale(LC_ALL, "Russian");
 
-	cout << endl << list.extractHead() << " <- ";
-	printList(list);
-	clear(list);
-	printList(list);
-
-	cout << endl << "extractHead empty: " << list.extractHead() << endl;
-	printList(list);
-
-	cout << endl << "extractTail empty: " << list.extractTail() << endl;
-	printList(list);
-
-	cout << endl <<"extract index3 empty: " << list.extract(3) << endl;
-	printList(list);
-
-	list += 9; list += 8; list += 7; list += 6; list += 5; list += 4;
-
-	cout << endl << "extract index3: " << list.extract(3) << endl;
-	cout << endl << "extract index8: " << list.extract(8) << endl;
-	printList(list);
-	cout << endl;
-
-	LinkedList list2;
-	list2 += 1; list2 += 2; list2 += 3; list2 += 4; list2 += 5; list2 += 6;
-	cout << "list2:" << endl;
-	printList(list2);
-	cout << endl;
-
-	list = list2;
-	cout << "list = list2:" << endl;
-	printList(list);
-	cout << endl;
-
-	clear(list);
-	printList(list);
-
-	list = list2;
-	cout << "list{empty} = list2:" << endl;
-	printList(list);
-	cout << endl;
-
-	clear(list); list += 1;
-	printList(list);
-	cout << "list = list2:" << endl;
-	printList(list);
-	cout << endl;
-
-
-	
-	cout <<"list -= 3, 3 - index:" << endl;
-	list -= 3;
-	printList(list);
-	cout << endl;
-
-	clear(list);
-	printList(list);
-	cout << "list{empty} -= 3:" << endl;
-
-	list -= 3;
-	printList(list);
-	cout << endl;
-
-	list += 8;
-	printList(list);
-	cout << "list -= 3:" << endl;
-	list -= 3;
-	printList(list);
-	cout << endl;
-
-
-	/*int i1 = input();
-	int i2 = input();
-	list.swap(i1, i2);*/
-	/*printList(list);*/
-
-	return 0;
+	int choice = -1;
+	while (choice != 0)
+	{
+		system("cls");
+		printList(list);
+		cout << endl;
+		printMenu();
+		cin >> choice;
+		processChoice(choice, list);
+		system("pause");
+	}
+	return EXIT_SUCCESS;
 }
