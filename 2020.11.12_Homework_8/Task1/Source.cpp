@@ -21,7 +21,7 @@ void clear(LinkedList& list)
 {
 	for (int i = list.length(); i > 0; --i)
 	{
-		list.extractTail();
+		list.extractHead();
 	}
 }
 
