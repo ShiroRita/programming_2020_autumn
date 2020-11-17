@@ -75,7 +75,7 @@ void indexOfFn(LinkedList& list)
 	printList(list);
 	cout << "index of ";
 	int element = input();
-	cout << ": " << list.indexOf(element) << endl;
+	cout << "index = " << list.indexOf(element) << endl;
 }
 
 void containsFn(LinkedList& list)
@@ -322,6 +322,7 @@ void processChoice(int choice, LinkedList& list)
 			}
 			indexOfFn(list);
 		}
+		break;
 		case 4:
 		{
 			indexOfFn(list);

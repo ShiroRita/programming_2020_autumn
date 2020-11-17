@@ -186,11 +186,12 @@ int LinkedList::extractHead()
 	}
 	else if (head == tail)
 	{
-		int extracted = tail->data;
-		this->head = nullptr;
-		this->tail = nullptr;
+		delete tail;
+		delete head;
+		head = nullptr;
+		tail = nullptr;
 		count = 0;
-		return extracted;
+		return 0;
 	}
 	else
 	{
@@ -216,11 +217,12 @@ int LinkedList::extractTail()
 	}
 	else if (head == tail)
 	{
-		int extracted = tail->data;
-		this->head = nullptr;
-		this->tail = nullptr;
+		delete head;
+		delete tail;
+		head = nullptr;
+		tail = nullptr;
 		count = 0;
-		return extracted;
+		return 0;
 	}
 	else {
 		int extracted = tail->data;
@@ -307,16 +309,16 @@ int LinkedList::indexOf(int element)
 	}
 	Node* temp = head;
 	int index = 0;
-	while (element != temp->data)
+	while (temp->data != element)
 	{
-		temp = temp->next;
 		++index;
-		if (index == count)
+		temp = temp->next;
+		if (temp == nullptr)
 		{
-			break;
+			return -1;
 		}
 	}
-	return (index == count ? -1 : index);
+	return index;
 }
 
 bool LinkedList::contains(int element)
