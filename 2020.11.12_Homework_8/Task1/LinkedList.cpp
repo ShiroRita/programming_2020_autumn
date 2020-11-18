@@ -186,7 +186,6 @@ int LinkedList::extractHead()
 	}
 	else if (head == tail)
 	{
-		delete tail;
 		delete head;
 		head = nullptr;
 		tail = nullptr;
@@ -199,10 +198,7 @@ int LinkedList::extractHead()
 		Node* temp = head->next;
 		delete head;
 		head = temp;
-		while (temp->next != nullptr)
-		{
-			temp = temp->next;
-		}
+		
 		--count;
 
 		return extracted;
@@ -218,7 +214,6 @@ int LinkedList::extractTail()
 	else if (head == tail)
 	{
 		delete head;
-		delete tail;
 		head = nullptr;
 		tail = nullptr;
 		count = 0;
@@ -262,16 +257,9 @@ int LinkedList::extract(int index)
 	}
 	Node* temp2 = temp;
 	temp = temp->next;
-	int extracted = temp->data;
-	Node* node = temp;
-	temp = temp->next;
-	delete node;
-	temp2->next = temp;
-	for (int i = index; i < count - 2; ++i)
-	{
-		temp = temp->next;
-	}
-	temp->next = nullptr;
+	int extracted = temp->data;//temp == list[index]
+	temp2->next = temp->next;
+	delete temp;
 	--count;
 	return extracted;
 }
@@ -285,16 +273,15 @@ LinkedList& LinkedList::operator=(LinkedList list)
 {
 	while (count > 0)
 	{
-		extractTail();
+		extractHead();
 	}
 	addToHead(list.head->data);
 	Node* temp = list.head;
-
-	for (int i = 0; i < list.count - 1; ++i)
+	temp = temp->next;
+	while (temp != nullptr)
 	{
-		temp = temp->next;
-
 		addToTail(temp->data);
+		temp = temp->next;
 	}
 	count = list.count;
 

@@ -19,7 +19,7 @@ int input()
 
 void clear(LinkedList& list)
 {
-	for (int i = list.length(); i > 0; --i)
+	while (list.length() > 0)
 	{
 		list.extractHead();
 	}
@@ -116,6 +116,7 @@ void choice8(LinkedList& list1, LinkedList list2)
 	cout << "list1 = list2: " << endl;
 	list1 = list2;
 	cout << "list1: " << list1 << endl;
+	clear(list2);
 }
 
 void processChoice(int choice, LinkedList& list)
