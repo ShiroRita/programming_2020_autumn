@@ -186,11 +186,12 @@ int LinkedList::extractHead()
 	}
 	else if (head == tail)
 	{
+		int extracted = head->data;
 		delete head;
 		head = nullptr;
 		tail = nullptr;
 		count = 0;
-		return 0;
+		return extracted;
 	}
 	else
 	{
@@ -213,11 +214,7 @@ int LinkedList::extractTail()
 	}
 	else if (head == tail)
 	{
-		delete head;
-		head = nullptr;
-		tail = nullptr;
-		count = 0;
-		return 0;
+		extractHead();
 	}
 	else {
 		int extracted = tail->data;
@@ -269,22 +266,24 @@ void LinkedList::operator-=(int index)
 	extract(index);
 }
 
-LinkedList& LinkedList::operator=(LinkedList list)
+LinkedList& LinkedList::operator=(LinkedList& list)
 {
-	while (count > 0)
+	if (&list != this)
 	{
-		extractHead();
-	}
-	addToHead(list.head->data);
-	Node* temp = list.head;
-	temp = temp->next;
-	while (temp != nullptr)
-	{
-		addToTail(temp->data);
+		while (count > 0)
+		{
+			extractHead();
+		}
+		addToHead(list.head->data);
+		Node* temp = list.head;
 		temp = temp->next;
+		while (temp != nullptr)
+		{
+			addToTail(temp->data);
+			temp = temp->next;
+		}
+		count = list.count;
 	}
-	count = list.count;
-
 	return *this;
 }
 

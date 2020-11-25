@@ -67,7 +67,7 @@ public:
 	/// <param name="">индекс удаляемого элемента</param>
 	void operator-=(int index);
 
-	LinkedList& operator=(LinkedList list);
+	LinkedList& operator=(LinkedList& list);
 
 	/// <summary>
 	/// поиск элемента
