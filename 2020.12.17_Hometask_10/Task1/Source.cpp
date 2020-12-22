@@ -1,5 +1,4 @@
 #include<iostream>
-#include<ctime>
 
 using namespace std;
 
@@ -17,8 +16,6 @@ void printArray(int** data, int n)
 
 int main()
 {
-	
-
 	int n = 0;
 	cout << "input n = ";
 	cin >> n;
@@ -85,7 +82,6 @@ int main()
 	printArray(data, n);
 
 
-
 	for (int i = 0; i < n; ++i)
 	{
 		for (int j = 0; j < n; ++j)
@@ -93,8 +89,6 @@ int main()
 			data[i][j] = 0;
 		}
 	}
-
-	
 
 
 	cout << endl << 5 << endl;
